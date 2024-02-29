@@ -1,0 +1,33 @@
+<materialLib name="texturing">
+    <textures>
+        <texture name="teapot" filename="textures/teapot.jpg" mipmap = "true"/>
+        <texture name="crate" filename="textures/crate.jpg" mipmap = "true"/>
+    </textures>
+    
+    <shaders>
+        <shader name="texture" vs="shaders/texture.vert"
+                            ps="shaders/texture.frag" />
+    </shaders>
+
+    <materials>
+
+        <material name="textured">
+            <shader name="texture" >
+                <values>
+                    <valueof uniform = "m_pvm" type="RENDERER"
+                                component="PROJECTION_VIEW_MODEL"/>
+                    <valueof uniform = "tex" type="TEXTURE_BINDING"
+                    component = "UNIT" id="0"/>
+                </values>
+
+            </shader>
+            <textures>
+                <texture name="crate" UNIT="0"/>
+            </textures>
+        </material>
+
+    </materials>
+
+
+
+</materialLib>    

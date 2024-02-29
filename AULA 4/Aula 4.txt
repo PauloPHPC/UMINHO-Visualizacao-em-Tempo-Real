@@ -1,0 +1,14 @@
+Toda imagem tem as suas coordenadas de textura entre 0 e 1 num plano cartesiano.
+
+Mapeamos cada vertice das texturas e associamos ao da imagem
+
+Não há uma regra geral de colocar as coordenadas de textura, não é algo que podemos inventar, é algo que quem criou o modelo é 
+responsavel por criar as coordenadas de textura... tem que ser feito a mão e é um dos processos mais dificeis.
+
+As coordenadas de textura fazem parte do vertice.
+
+Fragment shader vai receber a função texture(tex(sampler2D ou sampler3D), tc (vec2)) -> ou vai buscar o ponto ou a média dos pontos.
+
+Vertex Shader vai ter o TC. Não há transformaçao a ser feita nas coordenadas de textura.
+
+Uma textura pode ter varias imagens de diversos tamanhos para quando nos afastamos, manter a qualidade da imagem.
