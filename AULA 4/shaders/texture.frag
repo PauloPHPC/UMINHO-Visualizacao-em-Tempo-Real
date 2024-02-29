@@ -45,7 +45,7 @@ void main() {
 
 
 
-    vec2 deriv = vec2(dFdx(fr.s), dFdy(fr.s));
+    vec2 deriv = vec2(dFdx(tc.s * div), dFdy(tc.s * div));
 
     float len = length(deriv);
 
