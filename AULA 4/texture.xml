@@ -1,6 +1,13 @@
 <project name="texturing" >
 
     <assets>
+        <attributes>
+            <attribute name = "width" type = "COLOR" data = "FLOAT" value = "0.5" />
+            <attribute name = "gap" type = "COLOR" data = "FLOAT" value = "0.1" />
+            <attribute name = "div" type = "COLOR" data = "INT" value = "5" />
+            <attribute name = "secondary_color" type = "COLOR" data = "VEC4" x = "0.5" y = "0.5" z = "0.5" />
+            <attribute name = "factor" type = "COLOR" data = "FLOAT" value = "0.5" />
+        </attributes>
         <scenes>
             <scene name="teapot" filename="models/Teapot.3ds" param="UNITIZE SWAP_YZ"/>
             <scene name="cube" filename="models/cube2.obj" param="UNITIZE"/>
@@ -42,4 +49,45 @@
 
         </pipeline>
     </pipelines>
+    <interface>
+        <window label = "Texture Project">
+            <var label="div"
+                type="COLOR"
+                context = "texturing::textured"
+                component = "div"
+                def = "min=1 max=10"/>
+
+            <var label="gap"
+                type="COLOR"
+                context = "texturing::textured"
+                component = "gap"
+                def = "min=0 max=1"/>
+
+            <var label="width"
+                type="COLOR"
+                context = "texturing::textured"
+                component = "width"
+                def = "min=0 max=1"/>
+
+            <var label="diffuse"
+                type="COLOR"
+                context = "texturing::textured"
+                component = "DIFFUSE"
+                mode = "COLOR"/>
+
+            <var label="secondary_diffuse"
+                type="COLOR"
+                context = "texturing::textured"
+                component = "secondary_color"
+                mode = "COLOR"/>
+
+            <var label="factor"
+                type="COLOR"
+                context = "texturing::textured"
+                component = "factor"
+                def = "min=0 max=5"/>
+        </window>
+
+
+    </interface>
 </project>

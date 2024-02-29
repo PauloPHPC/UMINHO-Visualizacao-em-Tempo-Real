@@ -2,6 +2,7 @@
     <textures>
         <texture name="teapot" filename="textures/teapot.jpg" mipmap = "true"/>
         <texture name="crate" filename="textures/crate.jpg" mipmap = "true"/>
+        <texture name="coloredLine" filename="textures/coloredLine.jpg" mipmap = "true"/>
     </textures>
     
     <shaders>
@@ -18,11 +19,22 @@
                                 component="PROJECTION_VIEW_MODEL"/>
                     <valueof uniform = "tex" type="TEXTURE_BINDING"
                     component = "UNIT" id="0"/>
+                    <valueof uniform = "width" type = "COLOR"
+                        component = "width"/>
+                    <valueof uniform = "gap" type = "COLOR"
+                        component = "gap"/>
+                    <valueof uniform = "div" type = "COLOR"
+                        component = "div"/>
+                    <valueof uniform = "secondary_color" type = "COLOR"
+                        component = "secondary_color"/>
+                    <valueof uniform = "DIFFUSE" type="COLOR" component="DIFFUSE"/>
+                    <valueof uniform = "factor" type = "COLOR"
+                        component = "factor"/>
                 </values>
 
             </shader>
             <textures>
-                <texture name="crate" UNIT="0"/>
+                <texture name="coloredLine" UNIT="0"/>
             </textures>
         </material>
 
