@@ -2,6 +2,7 @@
 
 uniform float shininess = 128;
 uniform sampler2D texEarth, texSpec, texNight, texClouds;
+uniform float timer;
 
 in	vec4 eye;
 in	vec3 n;
@@ -10,6 +11,21 @@ in vec2 texCoord;
 
 out vec4 colorOut;
 
+float snoise(vec4 p);
+
+float perlin(vec4 p) {
+	float c = 0, amp = 1.0, freq = 0;
+	for (int i = 0; i <5; ++i){
+		c = c + snoise(vec4(freq))*amp;
+		amp /= 2.0;
+		freq *=2.0;
+	}
+	c = c*0,5 + 0,5;
+	return c;
+}
+
+const float PI = 3.14159;
+
 void main() {
 
 	vec4 eColor = texture(texEarth, texCoord);
@@ -17,6 +33,13 @@ void main() {
 	vec4 eNight = texture(texNight,texCoord);
 	float eClouds = texture(texClouds,texCoord).r;
 
+	vec2 t = vec2(texCoord.s * 2 * PI, -PI * 0.5 + texCoord.t * PI);
+	vec3 s = vec3(cos(t.t)*sin(t.s), sin(t.t), cos(t.t)*cos(t.s));
+	eClouds = perlin(vec4(s, timer * 0.000001));
+
+
+	// eClouds = perlin(vec4(texCoord + vec2(timer * 0.000001,0), timer * 0.000001,0));
+	eClouds = smoothstep(0.4, 1.0, eClouds);
 
 	// set the specular term to black
 	vec4 spec = vec4(0.0);

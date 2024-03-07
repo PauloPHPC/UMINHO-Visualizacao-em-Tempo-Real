@@ -8,8 +8,15 @@
 	</textures>
 
 	<shaders>
-		<shader name="textured" 	vs = "shaders/texture.vert" 
-									ps = "shaders/texture.frag" />
+		<shader name="textured"> 	
+			<vs>
+				<file name= "shaders/texture.vert"/>
+			</vs>
+			<ps>
+				<file name= "shaders/texture.frag"/>
+				<file name= "shaders/noise.frag"/>
+			</ps>
+		</shader> 
 	</shaders>
 	
 	<materials>
@@ -51,6 +58,7 @@
 							type="TEXTURE_BINDING"
 							component="UNIT" 
 							id="3"/>
+					<valueof uniform="timer" type="RENDERER" component="TIMER" />
 					 
 				</values>
 			</shader>
