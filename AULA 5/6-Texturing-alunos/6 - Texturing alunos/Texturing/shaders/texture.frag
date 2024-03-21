@@ -1,46 +1,53 @@
 #version 330
 
+
+uniform sampler2D earthTex, specTex, nightTex, cloudsTex;
 uniform float shininess = 128;
-uniform sampler2D texEarth, texSpec, texNight, texClouds;
 uniform float timer;
 
 in	vec4 eye;
+in	vec2 texCoord;
 in	vec3 n;
 in	vec3 ld;
-in vec2 texCoord;
 
 out vec4 colorOut;
 
+
 float snoise(vec4 p);
 
-float perlin(vec4 p) {
-	float c = 0, amp = 1.0, freq = 0;
-	for (int i = 0; i <5; ++i){
-		c = c + snoise(vec4(freq))*amp;
-		amp /= 2.0;
-		freq *=2.0;
-	}
-	c = c*0,5 + 0,5;
-	return c;
+float perlinNoise(vec4 p) {
+
+    float c=0, amp = 1.0;
+    vec4 freq = p;
+
+
+    for (int i = 0; i < 5; ++i) {
+        c = c + snoise(freq) * amp;
+        amp *= 0.5;
+        freq *= 2;
+    }
+
+    c = c * 0.5 + 0.5;
+
+    return c;
 }
 
 const float PI = 3.14159;
 
 void main() {
 
-	vec4 eColor = texture(texEarth, texCoord);
-	float eSpec = texture(texSpec,texCoord).r;
-	vec4 eNight = texture(texNight,texCoord);
-	float eClouds = texture(texClouds,texCoord).r;
+    vec4 eColor = texture(earthTex, texCoord);
+    float  eSpec = texture(specTex, texCoord).r;
+    vec4 eNight = texture(nightTex, texCoord);
+    //float eClouds = texture(cloudsTex, texCoord).r;
 
-	vec2 t = vec2(texCoord.s * 2 * PI, -PI * 0.5 + texCoord.t * PI);
-	vec3 s = vec3(cos(t.t)*sin(t.s), sin(t.t), cos(t.t)*cos(t.s));
-	eClouds = perlin(vec4(s, timer * 0.000001));
+    vec2 t = vec2(2 * PI * texCoord.s + timer*0.00001 , PI * (texCoord.t - 0.5));
+    vec3 sc = vec3(sin(t.s)*cos(t.t) , sin(t.t), cos(t.s)*cos(t.t)) ;
 
-
-	// eClouds = perlin(vec4(texCoord + vec2(timer * 0.000001,0), timer * 0.000001,0));
-	eClouds = smoothstep(0.4, 1.0, eClouds);
-
+    float eClouds = perlinNoise(vec4(sc,timer* 0.00001) * 8);
+    
+    //float eClouds = perlinNoise(vec4(texCoord ,timer* 0.00001,0) * 16);
+    eClouds = smoothstep(0.4, 0.9, eClouds) * 0.8;
 	// set the specular term to black
 	vec4 spec = vec4(0.0);
 
@@ -60,10 +67,14 @@ void main() {
 		spec = vec4(1) * pow(intSpec,shininess);
 	}
 
-	vec4 cDay = intensity * eColor + eClouds + spec * eSpec * (1-eClouds);
-	vec4 cNight = eNight * (1-eClouds);
-	
-	float f = smoothstep(0, 0.2, intensity);
-	colorOut = mix(cNight, cDay, f);
+
+    vec4 colorDay = max((intensity * eColor + spec * eSpec) * (1-eClouds) + eClouds, (eColor * (1-eClouds) + eClouds) * 0.25);
+    vec4 colorNight = eNight * (1 - eClouds);
+
+    float f = smoothstep(0,0.1, intensity);
+    colorOut = mix(colorNight, colorDay, f);
 
 }
+
+
+

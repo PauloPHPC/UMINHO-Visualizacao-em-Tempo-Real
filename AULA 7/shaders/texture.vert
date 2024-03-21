@@ -16,7 +16,8 @@ out Data {
 	vec3 eye;
 	vec2 texCoord;
 	vec3 l_dir;
-    vec3 normal;
+  vec3 normal;
+  vec3 pos;
 } DataOut;
 
 
@@ -34,6 +35,8 @@ void main () {
 	// move light and eye vectors to tangent space
 	DataOut.eye = vec3(-(m_viewModel * position)); 
 	DataOut.l_dir = vec3(m_view * -l_dir);
+  
+  DataOut.pos = vec3 position;
 
 	gl_Position = m_pvm * position;	
 }

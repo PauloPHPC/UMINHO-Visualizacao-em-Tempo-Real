@@ -7,7 +7,8 @@ in Data {
 	vec3 eye;
 	vec2 texCoord;
 	vec3 l_dir;
-    vec3 normal;
+  vec3 normal;
+  vec3 pos;
 } DataIn;
 
 out vec4 colorOut;
@@ -17,7 +18,10 @@ float perlinNoise(vec3 pos);
 void main() {
 
 	vec4 color = texture(diffuseY, DataIn.texCoord);
+  vec4 tex_rust = texture(rust, DataIn.texCoord);
 
+
+  float noise = clamp(pow(perlinNoise((DataIn.pos),0,1)));
 	// normalize both input vectors
 	vec3 e = normalize(DataIn.eye);
 	vec3 l = normalize(DataIn.l_dir);

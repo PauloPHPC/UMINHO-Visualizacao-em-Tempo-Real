@@ -2,15 +2,15 @@
 <materialLib name="Texture">
 
 	<textures>
-		<texture name="diffuseY" filename="../metal_barrel/diffus_yellow.png" mipmap="true!" />
-		<texture name="diffuseB" filename="../metal_barrel/diffus_blue.png" mipmap="true!" />
-		<texture name="diffuseG" filename="../metal_barrel/diffus_green.png" mipmap="true!" />
-		<texture name="diffuseR" filename="../metal_barrel/diffus_red.png" mipmap="true!" />
-		<texture name="diffuseBl" filename="../metal_barrel/diffus_black.png" mipmap="true!" />
-		<texture name="normalMap" filename="../metal_barrel/normal_hard_bumps.png" mipmap="true!" />
-		<texture name="specularMap" filename="../metal_barrel/specular_stainless_steel.png" mipmap="true!" />
-		<texture name="rust" filename="../metal_barrel/diffus_rust.png" mipmap="true!" />
-		<texture name="noise" filename="../textures/fractalNoise.jpg" mipmap="true!" />
+		<texture name="diffuseY" filename="./metal_barrel/diffus_yellow.png" mipmap="true!" />
+		<texture name="diffuseB" filename="./metal_barrel/diffus_blue.png" mipmap="true!" />
+		<texture name="diffuseG" filename="./metal_barrel/diffus_green.png" mipmap="true!" />
+		<texture name="diffuseR" filename="./metal_barrel/diffus_red.png" mipmap="true!" />
+		<texture name="diffuseBl" filename="./metal_barrel/diffus_black.png" mipmap="true!" />
+		<texture name="normalMap" filename="./metal_barrel/normal_hard_bumps.png" mipmap="true!" />
+		<texture name="specularMap" filename="./metal_barrel/specular_stainless_steel.png" mipmap="true!" />
+		<texture name="rust" filename="./metal_barrel/diffus_rust.png" mipmap="true!" />
+		<texture name="noise" filename="./textures/fractalNoise.jpg" mipmap="true!" />
 	</textures>
 
 	<shaders>
