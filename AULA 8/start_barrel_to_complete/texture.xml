@@ -129,11 +129,15 @@
 				</lights>
 			</pass>
 
-			<!--pass class="quad" name="render" >
+			<pass class="quad" name="render" >
+				
 				<COLOR_CLEAR value="false" />
+				
 				<viewport name="MainViewport" />
+				
 				<material name="deferred" fromLibrary="Texture" />
-			</pass-->
+			
+			</pass>
  			
 		</pipeline>
 		
