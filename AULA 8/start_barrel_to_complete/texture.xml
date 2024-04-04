@@ -4,11 +4,11 @@
 		<scenes>
 			<scene name="Barrel" param="UNITIZE">
 				<TRANSLATE x="0" y="1" z= "0" />
-				<file name="./metal_barrel/metal_barrel.obj"/>
+				<file name="../metal_barrel/metal_barrel.obj"/>
 			</scene>
 			<scene name="Plane" >
 				<SCALE x="200" y="200" z="200" />
-				<file name="./models/plane.obj"/>
+				<file name="../models/plane.obj"/>
 			</scene>
 		</scenes>
 		
@@ -17,15 +17,15 @@
 				<CLEAR_COLOR r="1.0" g="1.0" b="1.0" />
 			</viewport>
 		</viewports>
-
+		
 		<cameras>
 			<camera name="MainCamera" >
 				<viewport name="MainViewport" />
 				<TYPE value="PERSPECTIVE"/>
-                <POSITION x="5.196" y="1.503" z="-0.128" w="1" />
-                <VIEW x="-0.970" y="-0.229" z="0.079" w="0" />
-                <!--POSITION x="150" y="12.6437" z="67.9942" w="1" />
-                <VIEW x="-0.977805" y="-0.209222" z="0.0111561" w="0" /-->
+                <!--POSITION x="5.196" y="1.503" z="-0.128" w="1" />
+                <VIEW x="-0.970" y="-0.229" z="0.079" w="0" /-->
+                <POSITION x="150" y="12.6437" z="67.9942" w="1" />
+                <VIEW x="-0.977805" y="-0.209222" z="0.0111561" w="0" />
 				<NEAR value="0.1" />
 			</camera>
             <camera name="cam1">
@@ -73,7 +73,7 @@
 		</materialLibs>
 	</assets>
 	
-	<pipelines>
+	<pipelines default ="BarrelDeferred">
 	
 		<pipeline name="Barrel">
 
@@ -89,7 +89,7 @@
 			
 			<pass class="default" name="barrels" >
 				<COLOR_CLEAR value = "false" />
-				<scenes>
+				<scenes instances = "30000">
 					<scene name="Barrel" />
 				</scenes>
 				<camera name="MainCamera" />
@@ -102,6 +102,40 @@
 			</pass>
 		</pipeline>
 		
+		<pipeline name="BarrelDeferred">
+
+			<pass class="default" name="barrels" >
+				<COLOR_CLEAR value = "false" />
+				<scenes instances = "30000">
+					<scene name="Barrel" />
+				</scenes>
+				<camera name="MainCamera" />
+				<lights>
+					<light name="Sun" />
+				</lights>
+				<renderTarget name= "gBuffer" fromLibrary="Texture" />
+				<materialMaps>
+					<map fromMaterial="DefaultOBJMaterial" toMaterial="gBuffer" toLibrary="Texture" />
+				</materialMaps>
+			</pass>
+
+			<pass class="default" name="plane" >
+				<scenes>
+					<scene name="Plane" />
+				</scenes>
+				<camera name="MainCamera" />
+				<lights>
+					<light name="Sun" />
+				</lights>
+			</pass>
+
+			<!--pass class="quad" name="render" >
+				<COLOR_CLEAR value="false" />
+				<viewport name="MainViewport" />
+				<material name="deferred" fromLibrary="Texture" />
+			</pass-->
+ 			
+		</pipeline>
 		
 	</pipelines>
 </project>
