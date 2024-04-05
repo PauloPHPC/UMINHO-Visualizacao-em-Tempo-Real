@@ -31,7 +31,7 @@ void main() {
         offset += delta;
         h = texture(normalMap, offset).w;
     }
-
+    height = h;
     vec4 color = texture(diffuse, offset);
 
     vec3 n = normalize(texture(normalMap, offset).rgb * 2.0 - 1.0);
