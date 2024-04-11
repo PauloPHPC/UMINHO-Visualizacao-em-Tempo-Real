@@ -4,6 +4,7 @@
 
 	<shaders>
 		<shader name="pass through" 	ps="shaders/pixeldirdifambspec.frag" 
+										gs="shaders/passthrough.geom"
 										vs="shaders/pixeldirdifambspec.vert" />
 	</shaders>
 	
