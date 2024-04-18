@@ -1,14 +1,15 @@
-#version 420
+#version 330 core
+layout (location = 0) in vec3 aPos; // A posição do vértice
+layout (location = 1) in vec3 aNormal; // A normal do vértice
 
-in vec4 position;
-in vec3 normal;
+out vec3 Normal; // Normal para passar para o shader de fragmento
 
-out Data {
-	vec3 normal;
-} DataOut;
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 projection;
 
 void main()
 {
-	DataOut.normal = normal;
-	gl_Position = position ;
-} 
+    gl_Position = projection * view * model * vec4(aPos, 1.0);
+    Normal = aNormal;
+}
