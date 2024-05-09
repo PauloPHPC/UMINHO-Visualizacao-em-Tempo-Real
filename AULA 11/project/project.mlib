@@ -1,0 +1,40 @@
+<materialLib name='compute'>
+    <shaders>
+        <shader name='cb' cs='comp.comp' />
+    </shaders>
+
+    <buffers>
+        <buffer name='src'>
+            <DIM x='5' y='1' z='1' />
+            <structure>
+                <field value='FLOAT' />
+            </structure>
+            <file name='b.txt' />
+        </buffer>
+
+        <buffer name='dest'>
+            <DIM x='5' y='1' z='1' />
+            <structure>
+                <field value='FLOAT' />
+            </structure>
+            <file name='b.txt' />
+        </buffer>
+    </buffers>
+
+    <materials>
+        <material name='copyBuffer'>
+            <shader name='cb' />
+
+            <buffers>
+                <buffer name='src'>
+                    <TYPE value='SHADER_STORAGE' />
+                    <BINDING_POINT value='1' />
+                </buffer>
+                <buffer name='dest'>
+                    <TYPE value='SHADER_STORAGE' />
+                    <BINDING_POINT value='2' />
+                </buffer>
+            </buffers>
+        </material>
+    </materials>
+</materialLib>
